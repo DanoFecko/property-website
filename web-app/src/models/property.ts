@@ -1,12 +1,12 @@
 import { PropertyType } from './propertyType';
 
 export interface Property{
-  id: number;
+  id: string;
   type: PropertyType;
   price: number;
   size: number;
   location: string;
   status: boolean;
-  owner: number;
+  owner: string;
   pictures: number[];
 }

@@ -1,0 +1,11 @@
+<div class="container">
+  <mat-list>
+    <mat-list-item *ngFor="let property of properties">
+      <h3 matLine> {{property.location}} </h3>
+      <p matLine>
+        <span> {{property.price}} </span>
+        <span> {{property.size}} </span>
+      </p>
+    </mat-list-item>
+  </mat-list>
+</div>

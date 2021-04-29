@@ -1,8 +1,42 @@
 const express = require('express');
+const bodyParser = require("body-parser");
 const app = express();
-const bodyparser = require("body-parser");
+const propertyModel = require('./models/property');
+const mongoose = require('mongoose');
 
-app.use(bodyparser.json);
+const properties = [
+  {
+    id: '324234',
+    price: 10000,
+    location: 'Lubotice',
+    owner: '42354545',
+    size: 35,
+    pictures: [],
+    status: true,
+    type: 'HOUSE'
+  },
+  {
+    id: '646456',
+    price: 200000,
+    location: 'Brno',
+    owner: '42354545',
+    size: 100,
+    pictures: [312312, 323244],
+    status: true,
+    type: 'APARTMENT'
+  }
+];
+
+app.use(bodyParser.json());
+
+db = mongoose.connect('mongodb://localhost/property-web-site?retryWrites=true&w=majority', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(() => {
+  console.log("Connected to DB");
+}).catch(() => {
+  console.log("Connection to DB Failed");
+});
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -14,42 +48,33 @@ app.use((req, res, next) => {
   next();
 });
 
-app.post("/api/properties", (req, res, next) => {
-  const property = req.body;
+
+app.post('/api/properties', (req, res, next) => {
+  const property = new propertyModel({
+    price: req.body.price,
+    location: req.body.location,
+    owner: req.body.owner,
+    size: req.body.size,
+    pictures: req.body.pictures,
+    status: req.body.status,
+    type: req.body.type
+  });
+  property.save();
   console.log(property);
   res.status(201).json({
-    message: 'Post added successfully'
+    message: 'Property added successfully'
   });
+  next();
 });
 
 app.get('/api/properties', (req, res, next) => {
-  const posts = [
-    {
-      id: 324234,
-      price: 10000,
-      location: 'Lubotice',
-      owner: 42354545,
-      size: 35,
-      pictures: [],
-      status: true,
-      type: 1
-    },
-    {
-      id: 646456,
-      price: 200000,
-      location: 'Brno',
-      owner: 42354545,
-      size: 100,
-      pictures: [312312, 323244],
-      status: true,
-      type: 2
-    }
-  ];
-
+  //propertyModel.find();
   res.status(200).json({
+    properties: properties,
     message: 'Properties Fetched Successfully',
-    posts: posts
   });
+  // console.log('fetched properties');
+  next();
 });
 
 module.exports = app;

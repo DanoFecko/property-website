@@ -1,5 +1,5 @@
 export enum PropertyType {
-  Land,
-  House,
-  Apartment
+  LAND,
+  HOUSE,
+  APARTMENT
 }

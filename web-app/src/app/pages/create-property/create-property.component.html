@@ -1,0 +1,22 @@
+<div class="container">
+  <mat-card>
+    <form (submit)="onAddProperty(form)" #form="ngForm">
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          name="Address"
+          ngModel>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit">
+        Save Property
+      </button>
+    </form>
+
+  </mat-card>
+
+</div>
