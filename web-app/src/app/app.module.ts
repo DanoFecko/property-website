@@ -14,6 +14,7 @@ import { CreatePropertyComponent } from './pages/create-property/create-property
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { MatButtonModule } from '@angular/material/button';
     FormsModule,
     MatCardModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSelectModule
   ],
   providers: [PropertyService],
   bootstrap: [AppComponent]

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Property } from '../../../models/property';
 import { PropertyType } from '../../../models/propertyType';
 import { NgForm } from '@angular/forms';
+import { PropertyService } from '../../../services/propertyService';
 
 @Component({
   selector: 'app-create-property',
@@ -10,25 +11,24 @@ import { NgForm } from '@angular/forms';
 })
 export class CreatePropertyComponent implements OnInit {
 
-  newProperty: Property = {
-    id: '',
-    size: 0,
-    price: 0,
-    location: '',
-    type: PropertyType.LAND,
-    status: false,
-    owner: '',
-    pictures: [],
-  };
-
-  constructor() {
+  constructor(private propertyService: PropertyService) {
   }
 
   ngOnInit(): void {
   }
 
   onAddProperty(form: NgForm): void {
-
+    const property: Property = {
+      id: '',
+      size: form.value.size,
+      price: form.value.price,
+      location: form.value.location,
+      type: form.value.type,
+      status: true,
+      owner: 'admin',
+      pictures: [],
+    };
+    this.propertyService.addProperty(property);
   }
 
 }

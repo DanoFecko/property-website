@@ -29,7 +29,10 @@ const properties = [
 
 app.use(bodyParser.json());
 
-db = mongoose.connect('mongodb://localhost/property-web-site?retryWrites=true&w=majority', {
+
+db = mongoose.connect("mongodb://localhost:27017/property-web-site?retryWrites=true&w=majority", {
+  user: "pwsUser",
+  pass: "QqWwEe12",
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => {
@@ -64,17 +67,16 @@ app.post('/api/properties', (req, res, next) => {
   res.status(201).json({
     message: 'Property added successfully'
   });
-  next();
 });
 
 app.get('/api/properties', (req, res, next) => {
-  //propertyModel.find();
-  res.status(200).json({
-    properties: properties,
-    message: 'Properties Fetched Successfully',
+  propertyModel.find().then((properties) => {
+    console.log(properties)
+    res.status(200).json({
+      properties: properties,
+      message: 'Properties Fetched Successfully',
+    });
   });
-  // console.log('fetched properties');
-  next();
 });
 
 module.exports = app;

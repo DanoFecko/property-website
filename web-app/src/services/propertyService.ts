@@ -23,8 +23,7 @@ export class PropertyService {
       });
   }
 
-  addProperty(price: number, location: string, owner: string, size: number, pictures: number[], status: boolean, type: PropertyType): void {
-    const property: Property = {id: '', price, location, owner, size, pictures, status, type};
+  addProperty(property: Property): void {
     this.http.post<{ message: string }>('http://localhost:3000/api/properties', property)
       .subscribe((data) => {
         console.log(data.message);

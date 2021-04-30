@@ -1,14 +1,54 @@
 <div class="container">
   <mat-card>
     <form (submit)="onAddProperty(form)" #form="ngForm">
-      <mat-form-field>
-        <input
-          matInput
-          type="text"
-          name="Address"
-          ngModel>
-      </mat-form-field>
-
+      <p>
+        <mat-form-field>
+          <mat-label>
+            Address
+          </mat-label>
+          <input
+            matInput
+            type="text"
+            name="location"
+            ngModel>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <mat-label>
+            Price
+          </mat-label>
+          <input
+            matInput
+            type="number"
+            name="price"
+            ngModel>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <mat-label>
+            Size
+          </mat-label>
+          <input
+            matInput
+            type="number"
+            name="size"
+            ngModel>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <mat-label>
+            Type
+          </mat-label>
+          <mat-select>
+            <mat-option value="LAND">Land</mat-option>
+            <mat-option value="HOUSE">House</mat-option>
+            <mat-option value="APARTMENT">Apartment</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </p>
       <button
         mat-raised-button
         color="primary"
