@@ -11,17 +11,22 @@ import { PropertyListComponent } from './pages/property-list/property-list.compo
 import { HomeComponent } from './pages/home/home.component';
 import { MatListModule } from '@angular/material/list';
 import { CreatePropertyComponent } from './pages/create-property/create-property.component';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { HeaderComponent } from './header/header.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
     AppComponent,
     PropertyListComponent,
     HomeComponent,
-    CreatePropertyComponent
+    CreatePropertyComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +38,11 @@ import { MatSelectModule } from '@angular/material/select';
     MatCardModule,
     MatButtonModule,
     HttpClientModule,
-    MatSelectModule
+    MatSelectModule,
+    MatExpansionModule,
+    MatToolbarModule,
+    MatProgressSpinnerModule,
+    ReactiveFormsModule
   ],
   providers: [PropertyService],
   bootstrap: [AppComponent]

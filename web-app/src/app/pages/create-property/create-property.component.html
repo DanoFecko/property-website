@@ -1,18 +1,20 @@
 <div class="container">
   <mat-card>
-    <form (submit)="onAddProperty(form)" #form="ngForm">
-      <p>
+    <mat-spinner *ngIf="loading"></mat-spinner>
+    <form *ngIf="!loading" (submit)="onAddProperty()" #form="ngForm">
         <mat-form-field>
-          <mat-label>
-            Address
-          </mat-label>
+          <!--          <mat-label>-->
+          <!--            Address-->
+          <!--          </mat-label>-->
           <input
             matInput
             type="text"
             name="location"
+            placeholder="Address"
+            [(ngModel)]="property.location"
             ngModel>
         </mat-form-field>
-      </p>
+<!--        <mat-error *ngIf="location.invalid">This field is required</mat-error>-->
       <p>
         <mat-form-field>
           <mat-label>
@@ -22,6 +24,7 @@
             matInput
             type="number"
             name="price"
+            [(ngModel)]="property.price"
             ngModel>
         </mat-form-field>
       </p>
@@ -34,6 +37,7 @@
             matInput
             type="number"
             name="size"
+            [(ngModel)]="property.size"
             ngModel>
         </mat-form-field>
       </p>
@@ -42,13 +46,19 @@
           <mat-label>
             Type
           </mat-label>
-          <mat-select>
+          <mat-select [(value)]="property.type">
             <mat-option value="LAND">Land</mat-option>
             <mat-option value="HOUSE">House</mat-option>
             <mat-option value="APARTMENT">Apartment</mat-option>
           </mat-select>
         </mat-form-field>
       </p>
+      <div>
+        <button mat-raised-button type="button" (click)="filePicker.click()">
+          Pick Image
+        </button>
+        <input type="file" #filePicker>
+      </div>
       <button
         mat-raised-button
         color="primary"

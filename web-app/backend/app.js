@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require("body-parser");
 const app = express();
-const propertyModel = require('./models/property');
 const mongoose = require('mongoose');
+const propertyRoutes = require('./routes/properties');
 
 const properties = [
   {
@@ -47,36 +47,76 @@ app.use((req, res, next) => {
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept");
   res.setHeader("Access-Control-Allow-Methods",
-    "GET, POST, PATCH, DELETE, OPTIONS");
+    "GET, POST, PATCH, PUT, DELETE, OPTIONS");
   next();
 });
 
+app.use('/api/properties', propertyRoutes);
 
-app.post('/api/properties', (req, res, next) => {
-  const property = new propertyModel({
-    price: req.body.price,
-    location: req.body.location,
-    owner: req.body.owner,
-    size: req.body.size,
-    pictures: req.body.pictures,
-    status: req.body.status,
-    type: req.body.type
-  });
-  property.save();
-  console.log(property);
-  res.status(201).json({
-    message: 'Property added successfully'
-  });
-});
 
-app.get('/api/properties', (req, res, next) => {
-  propertyModel.find().then((properties) => {
-    console.log(properties)
-    res.status(200).json({
-      properties: properties,
-      message: 'Properties Fetched Successfully',
-    });
-  });
-});
+// app.post('/api/properties', (req, res, next) => {
+//   const property = new propertyModel({
+//     price: req.body.price,
+//     location: req.body.location,
+//     owner: req.body.owner,
+//     size: req.body.size,
+//     pictures: req.body.pictures,
+//     status: req.body.status,
+//     type: req.body.type
+//   });
+//   property.save().then(result => {
+//     console.log(result);
+//     res.status(201).json({
+//       message: 'Property added successfully'
+//     });
+//   });
+// });
+//
+// app.get('/api/properties', (req, res, next) => {
+//   propertyModel.find().then((properties) => {
+//     console.log(properties)
+//     res.status(200).json({
+//       properties: properties,
+//       message: 'Properties Fetched Successfully',
+//     });
+//   });
+// });
+//
+// app.get('/api/properties/:id', (req, res, next) => {
+//   propertyModel.findById(req.params.id).then(property => {
+//     if(property){
+//       res.status(200).json({property: property});
+//     }else{
+//       res.status(484).json({message: 'Property not found'});
+//     }
+//   });
+// });
+//
+// app.delete('/api/properties/:id', (req, res, next) => {
+//   propertyModel.deleteOne({_id: req.params.id}).then(result => {
+//     console.log(result);
+//     res.status(200).json({
+//       message: "Property deleted"
+//     });
+//   });
+// });
+//
+// app.put('/api/properties/:id', (req, res, next) => {
+//   const property = new propertyModel({
+//     _id: req.body._id,
+//     price: req.body.price,
+//     location: req.body.location,
+//     owner: req.body.owner,
+//     size: req.body.size,
+//     pictures: req.body.pictures,
+//     status: req.body.status,
+//     type: req.body.type
+//   });
+//   propertyModel.updateOne({_id: req.params.id}, property).then(result=> {
+//     console.log(result);
+//     res.status(200).json({message: "Update Successful!"})
+//   })
+//
+// });
 
 module.exports = app;

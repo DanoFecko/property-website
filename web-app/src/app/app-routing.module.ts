@@ -8,6 +8,7 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'property-list', component: PropertyListComponent},
   {path: 'create-property', component: CreatePropertyComponent},
+  {path: 'edit/:propertyId', component: CreatePropertyComponent},
   {path: '**', redirectTo: 'home'}
 ];
 
