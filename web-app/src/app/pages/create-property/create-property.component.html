@@ -1,7 +1,7 @@
 <div class="container">
   <mat-card>
     <mat-spinner *ngIf="loading"></mat-spinner>
-    <form *ngIf="!loading" (submit)="onAddProperty()">
+    <form *ngIf="!loading" [formGroup]="form" (submit)="onAddProperty()">
       <mat-form-field>
         <!--          <mat-label>-->
         <!--            Address-->
@@ -9,12 +9,10 @@
         <input
           matInput
           type="text"
-          name="location"
-          placeholder="Address"
-          [(ngModel)]="property.location"
-          ngModel>
+          formControlName="location"
+          placeholder="Address">
       </mat-form-field>
-      <!--        <mat-error *ngIf="location.invalid">This field is required</mat-error>-->
+      <!--        <mat-error *ngIf="form.get('location').invalid">This field is required</mat-error>-->
       <p>
         <mat-form-field>
           <mat-label>
@@ -23,9 +21,7 @@
           <input
             matInput
             type="number"
-            name="price"
-            [(ngModel)]="property.price"
-            ngModel>
+            formControlName="price">
         </mat-form-field>
       </p>
       <p>
@@ -36,9 +32,7 @@
           <input
             matInput
             type="number"
-            name="size"
-            [(ngModel)]="property.size"
-            ngModel>
+            formControlName="size">
         </mat-form-field>
       </p>
       <p>
@@ -53,16 +47,15 @@
           </mat-select>
         </mat-form-field>
       </p>
-      <div>
-
+      <div class="image-preview" *ngIf = "(pickedPicture !== '') && pickedPicture && form.get('picture').valid">
+        <img [src]="pickedPicture" [alt]= "form.value.title">
       </div>
       <div>
         <button mat-raised-button type="button" (click)="filePicker.click()">
-        Pick Image
+        Pick Picture
         </button>
-        <input type="file" #filePicker>
+        <input type="file" #filePicker (change)="PickedPicture($event)">
         <button
-          class=""
           mat-raised-button
           color="primary"
           type="submit">
